@@ -68,6 +68,20 @@ def render(title, otp_words, wordline_seq, bitplane_seq, bitline_seq, ored=False
     print(f'bl(h): {bl_hex_h}')
     print(f'bl(l): {bl_hex_l}')
 
+    # generate the calibration bits for full array only
+    if ored:
+        cal_seq = (on * 16) + ' ' + (on * 14) + off + on
+        print('  cal: ', end='')
+        for BP in bitplane_seq:
+            if BP == ' ':
+                print(center_spine_gap, end='')
+                continue
+            if 4 <= BP <= 15:
+                print(cal_seq[::-1] + bitplane_gap, end='')
+            else:
+                print(cal_seq + bitplane_gap, end='')
+        print()
+
     # generate the array
     for WL in wordline_seq:
         if ored:
@@ -93,6 +107,29 @@ def render(title, otp_words, wordline_seq, bitplane_seq, bitline_seq, ored=False
                 c = on if bv == 1 else off
                 print(c, end='')
             print(bitplane_gap, end='')
+        print()
+        # Draw the centerline ground vias (hardcoded because it's easier to write)
+        if ored and WL[0] == 0x7e:
+            for _ in range(2):
+                print(f'  CEN: ', end='')
+                for BP in bitplane_seq:
+                    if BP == ' ':
+                        print(center_spine_gap, end='')
+                        continue
+                    print((on * 16) + ' ' + (on * 16) + bitplane_gap, end='')
+                print()
+    # generate the calibration bits for full array only
+    if ored:
+        cal_seq = (on * 16) + ' ' + (on * 14) + off + on
+        print('  cal: ', end='')
+        for BP in bitplane_seq:
+            if BP == ' ':
+                print(center_spine_gap, end='')
+                continue
+            if 4 <= BP <= 15:
+                print(cal_seq[::-1] + bitplane_gap, end='')
+            else:
+                print(cal_seq + bitplane_gap, end='')
         print()
     print()
     print("-" * 16)
