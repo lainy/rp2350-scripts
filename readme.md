@@ -25,3 +25,9 @@ Files:
   for testing the entire flow. Shows the bitwise OR of adjacent bitcells which
   share a via, to match what is seen in PVC imaging.
 
+The following command sequence (\*nix shell) was used to dump the words burned
+into an RP2350:
+```sh
+picotool otp get -r (seq 0 4095) | grep '^ \+VALUE 0x' | cut -d' ' -f6
+```
+
