@@ -5,8 +5,6 @@ The associated paper can be found here:
 - https://arxiv.org/abs/2501.13276
 
 Script usage:
-- `initial_fuse_program.py` - Calls [picotool](https://github.com/raspberrypi/picotool) to burn a simple
-  test pattern into the fuses, used during initial recon.
 - `render.py` - Reads OTP fuse dump from `desired_render_words.txt`, outputs
   ASCII art of the fuse values. Can be used to obtain ASCII art of a fuse dump
   for comparison with PVC images.
