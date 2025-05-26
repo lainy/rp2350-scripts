@@ -136,11 +136,11 @@ def render(title, otp_words, wordline_seq, bitplane_seq, bitline_seq, ored=False
     print()
 
 
-# hypothesized bit plane ordering from left to right (see fuses-angle-small-hypaddr.jpg):
+# bit plane ordering from left to right (see fuses-angle-small-hypaddr.jpg):
 bitplanes = [16,17,18,19,20,21,22,23, 0, 1, 2, 3,' ', 4, 5, 6, 7, 8, 9,10,11,12,13,14,15]
-# hypothesized bit line ordering (relative to the word line offset)
+# bit line ordering (relative to the word line offset)
 bitlines = [28,29,30,31,27,26,25,24,20,21,22,23,19,18,17,16,' ',12,13,14,15,11,10, 9, 8, 4, 5, 6, 7, 3, 2, 1, 0]
-# hypothesized word line ordering (top to bottom):
+# word line ordering (top to bottom):
 wordlines = list(range(64,128)) + list(reversed(range(64)))
 
 # all the bitlines, indexed by bitplane number
@@ -175,6 +175,8 @@ for bitplane in range(24):
 
 render("even wordlines", otp, wordlines[::2], bitplanes, all_bitlines, ored=False)
 render("odd wordlines", otp, wordlines[1::2], bitplanes, all_bitlines, ored=False)
+render("interleaved (desired_render.txt format suitable for feeding into fuse_from_render.py)",
+       otp, wordlines, bitplanes, all_bitlines, ored=False)
 render("full map", otp, wordlines, bitplanes, all_bitlines, ored=True)
 
 #eof
